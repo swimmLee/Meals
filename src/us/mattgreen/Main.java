@@ -16,7 +16,7 @@ public class Main {
         cookbook = new Cookbook();
         //mealFacts = new MealFacts();
         facts = new ArrayList<MealFacts>();
-        int temp;
+        int temp, tcal;
 
         FileInput indata = new FileInput("meals_data.csv");
 
@@ -45,7 +45,9 @@ public class Main {
             if(fields[0].equals(current)){
                 //Stop Accumulating and summarize.
                 temp = mealFacts.setAccum(Integer.parseInt(fields[2]));
-                System.out.println("the counter is " + temp);
+                tcal = mealFacts.getCal();
+                System.out.println("the counter is " + temp
+                    + "\tcalories are " + tcal);
                 /*
                 System.out.println("current is " + current);
                 System.out.println("next is " + fields[0]);
@@ -62,7 +64,9 @@ public class Main {
                 //Make new category. Accumulate data.
                 mealFacts = new MealFacts(fields[0]);
                 temp = mealFacts.setAccum(Integer.parseInt(fields[2]));
-                System.out.println("the counter is " + temp);
+                tcal = mealFacts.getCal();
+                System.out.println("the counter is " + temp
+                    + "\tcalories are " + tcal);
                 current = fields[0];
             }
             else{
@@ -72,11 +76,14 @@ public class Main {
                 
                 System.out.println("current is " + current);
                 System.out.println("next is " + fields[0]);
+                System.out.println("The median is " + mealFacts.getMedian());
                 System.out.println(mealFacts.toString());
                 //Make new category. Accumulate data.
                 mealFacts = new MealFacts(fields[0]);
                 temp = mealFacts.setAccum(Integer.parseInt(fields[2]));
-                System.out.println("the counter is " + temp);
+                tcal = mealFacts.getCal();
+                System.out.println("the counter is " + temp
+                    + "\tcalories are " + tcal);
                 current = fields[0];
                 
             }
@@ -84,6 +91,7 @@ public class Main {
             cookbook.addElementWithStrings(fields[0], fields[1], fields[2]);
             
         }
+        System.out.println("The median is " + mealFacts.getMedian());
         System.out.println(mealFacts.toString());
 
         runMenu();

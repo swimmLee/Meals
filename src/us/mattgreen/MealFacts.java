@@ -18,7 +18,8 @@ public class MealFacts {
     private int count = 0;
     private int totCal = 0;
     private String name;
-    private List<String> facts = new ArrayList<String>();
+    private final int ARRAY_SIZE = 50;
+    private int[] calArray = new int[ARRAY_SIZE];
     
     public MealFacts(){
         
@@ -27,8 +28,16 @@ public class MealFacts {
     public MealFacts(String mealType){
         this.name = mealType;
     }
+    public int getCal(){
+        return calArray[count-1];
+    }
+    
+    public int getArrayCal(){
+        return calArray[count-1];
+    }
     
     public int setAccum(int cal){
+        calArray[count] = cal;
         count++;
         totCal += cal;
         if(cal < min)
@@ -38,12 +47,35 @@ public class MealFacts {
         //space to do median?
         return count;
     }
+    
+    public int getMedian(){
+        int median;
+        int sInd, lowInd, i, lowVal;
+        
+        for(sInd = 0; sInd<(count-1); sInd++){
+            lowInd = sInd;
+            lowVal = calArray[sInd];
+            for(i = sInd+1 ; i<count ; i++){
+                if(calArray[i] < lowVal){
+                    lowVal = calArray[i];
+                    lowInd = i;
+                }
+            }
+            System.out.println("median calArray[lowInd] " + calArray[lowInd]);
+            calArray[lowInd] = calArray[sInd];
+            calArray[sInd] = lowVal;
+        }
+        
+        median = calArray[(count-1)/2];
+        return median;
+    }
     @Override
     public String toString() {
         return "name " + name + "\t"
                 + "total " + totCal + "\t"
                 + "count " + count + "\t"
                 + "mean " + totCal/count + "\t"
+                + "median " + getMedian() + "\t"
                 + "min " + min + "\t"
                 + "max " + max ;
                 
