@@ -44,7 +44,6 @@ public class MealFacts {
             min = cal;
         else if(cal > max)
             max = cal;
-        //space to do median?
         return count;
     }
     
@@ -61,7 +60,7 @@ public class MealFacts {
                     lowInd = i;
                 }
             }
-            System.out.println("median calArray[lowInd] " + calArray[lowInd]);
+            //System.out.println("median calArray[lowInd] " + calArray[lowInd]);
             calArray[lowInd] = calArray[sInd];
             calArray[sInd] = lowVal;
         }
@@ -81,8 +80,8 @@ public class MealFacts {
         */
         return name + "\t"
                 + totCal + "\t"
-                + count + "\t"
-                // + totCal/count + "\t"
+                //+ count + "\t"
+                + totCal/count + "\t"
                 + min + "\t"
                 + max + "\t"
                 + getMedian();
