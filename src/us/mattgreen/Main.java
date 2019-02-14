@@ -14,9 +14,7 @@ public class Main {
     public Main() {
         keyboard = new Scanner(System.in);
         cookbook = new Cookbook();
-        //mealFacts = new MealFacts();
         facts = new ArrayList<>();
-        int temp, tcal;
         String str;
 
         FileInput indata = new FileInput("meals_data.csv");
@@ -24,44 +22,30 @@ public class Main {
         String line;
         String current = "start";
 
-        System.out.println("Reading in meals information from file...");
+        System.out.println("Reading in meal information from file...");
         
         
         while ((line = indata.fileReadLine()) != null) {
             String[] fields = line.split(",");
             
             if(fields[0].equals(current)){
-                temp = mealFacts.setAccum(Integer.parseInt(fields[2]));
-                tcal = mealFacts.getCal();
-                //System.out.println("the counter is " + temp
-                //    + "\tcalories are " + tcal);
+                mealFacts.setAccum(Integer.parseInt(fields[2]));
+                mealFacts.getCal();
                 
             }
             else if(current.equals("start")){
-                System.out.println("current is " + current);
-                System.out.println("next is " + fields[0]);
-
                 mealFacts = new MealFacts(fields[0]);
-                temp = mealFacts.setAccum(Integer.parseInt(fields[2]));
-                tcal = mealFacts.getCal();
-                //System.out.println("the counter is " + temp
-                //   + "\tcalories are " + tcal);
+                mealFacts.setAccum(Integer.parseInt(fields[2]));
+                mealFacts.getCal();
                 current = fields[0];
             }
             else{               
-                System.out.println("current is " + current);
-                System.out.println("next is " + fields[0]);
-                //System.out.println("The median is " + mealFacts.getMedian());
                 str = mealFacts.toString();
                 facts.add(str);
-                System.out.println(mealFacts.toString());
                 mealFacts = new MealFacts(fields[0]);
-                temp = mealFacts.setAccum(Integer.parseInt(fields[2]));
-                tcal = mealFacts.getCal();
-                System.out.println("the counter is " + temp
-                    + "\tcalories are " + tcal);
-                current = fields[0];
-                
+                mealFacts.setAccum(Integer.parseInt(fields[2]));
+                mealFacts.getCal();
+                current = fields[0];                
             }
             
             cookbook.addElementWithStrings(fields[0], fields[1], fields[2]);
@@ -69,8 +53,6 @@ public class Main {
         }
         str = mealFacts.toString();
         facts.add(str);
-        System.out.println("The median is " + mealFacts.getMedian());
-        System.out.println(mealFacts.toString());
 
         runMenu();
     }
@@ -109,7 +91,6 @@ public class Main {
                     break;
                 case "4":
                     listFacts();
-                    // doControlBreak();
                     break;
                 case "5":
                     userContinue = false;
@@ -122,7 +103,7 @@ public class Main {
     }
     
     private void listFacts(){
-        System.out.println("meal type\ttotal\tmean\tmin\tmax\tmedian");
+        System.out.println("type\ttotal\tmean\tmin\tmax\tmedian");
         for(int i=0; i<facts.size(); i++){
             System.out.println(facts.get(i));
         }
