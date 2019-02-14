@@ -71,13 +71,21 @@ public class MealFacts {
     }
     @Override
     public String toString() {
-        return "name " + name + "\t"
+        /*return "name " + name + "\t"
                 + "total " + totCal + "\t"
                 + "count " + count + "\t"
                 + "mean " + totCal/count + "\t"
                 + "median " + getMedian() + "\t"
                 + "min " + min + "\t"
                 + "max " + max ;
+        */
+        return name + "\t"
+                + totCal + "\t"
+                + count + "\t"
+                // + totCal/count + "\t"
+                + min + "\t"
+                + max + "\t"
+                + getMedian();
                 
     }
 
